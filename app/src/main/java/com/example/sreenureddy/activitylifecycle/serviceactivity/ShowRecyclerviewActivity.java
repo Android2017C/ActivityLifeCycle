@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
+import com.example.sreenureddy.activitylifecycle.clickeventhelpher.ItemDividerDecoration;
 import com.example.sreenureddy.activitylifecycle.clickeventhelpher.RecyclerViewClickListener;
 import com.example.sreenureddy.activitylifecycle.clickeventhelpher.RecyclerViewTouchListener;
 import com.example.sreenureddy.activitylifecycle.R;
@@ -27,6 +28,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.sreenureddy.activitylifecycle.clickeventhelpher.ItemDividerDecoration.HORIZONTAL_LIST;
+import static com.example.sreenureddy.activitylifecycle.clickeventhelpher.ItemDividerDecoration.VERTICAL_LIST;
+
 /**
  * Created by SreenuReddy on 2/21/2018.
  */
@@ -42,9 +46,14 @@ public class ShowRecyclerviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_result_activity);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        //show in vertical recyclerview
+        // RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        //show in horizontal recyclerview
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        RecyclerView.ItemDecoration dividerItemDecoration = new ItemDividerDecoration(getApplicationContext(),HORIZONTAL_LIST);
+        recyclerView.addItemDecoration(dividerItemDecoration);
         // recyclerView.addItemDecoration(new ItemDividerDecoration(this, LinearLayoutManager.VERTICAL));
         contactsList = new ArrayList<Contacts>();
         loadContacts();
